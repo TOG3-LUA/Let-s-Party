@@ -1,4 +1,4 @@
-local ScreenGuiDSP = Instance.new("ScreenGui")
+local ScreenGlocal ScreenGuiDSP = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
 local Close = Instance.new("TextButton") 
@@ -52,6 +52,7 @@ local RemoveBtoolsGiver = Instance.new("TextButton")
 local Input = Instance.new("TextBox")
 local Decription = Instance.new("TextLabel")
 local Border = Instance.new("TextLabel")
+local No_Arms = Instance.new("TextButton")
 
 --Properties:
 
@@ -505,6 +506,19 @@ RemoteKill.TextScaled = true
 RemoteKill.TextSize = 28.000
 RemoteKill.TextWrapped = true
 
+No_Arms.Name = "No_Arms"
+No_Arms.Parent = CommandScroll
+No_Arms.BackgroundColor3 = Color3.fromRGB(35, 35, 58)
+No_Arms.BorderColor3 = Color3.fromRGB(255, 0, 98)
+No_Arms.BorderSizePixel = 2
+No_Arms.Size = UDim2.new(0, 95, 0, 46)
+No_Arms.Font = Enum.Font.SourceSans
+No_Arms.Text = "No Arms"
+No_Arms.TextColor3 = Color3.fromRGB(168, 168, 168)
+No_Arms.TextScaled = true
+No_Arms.TextSize = 28.000
+No_Arms.TextWrapped = true
+
 PlayersTab.Name = "PlayersTab"
 PlayersTab.Parent = Frame
 PlayersTab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -725,7 +739,7 @@ local function FFYO_fake_script() -- ScreenGuiDSP.LocalScript
 		RemoveTool = CommandScroll:FindFirstChild("RemoveTool"),
 		AllTools = CommandScroll:FindFirstChild("AllTools"),
 		Midget = CommandScroll:FindFirstChild("Midget"),
-		Unwing = CommandScroll:FindFirstChild("Unwing"),
+		No_Arms = CommandScroll:FindFirstChild("No_Arms"),
 		Bald = CommandScroll:FindFirstChild("Bald"),
 		Naked = CommandScroll:FindFirstChild("Naked"),
 		Box = CommandScroll:FindFirstChild("Box"),
@@ -1266,13 +1280,13 @@ local function FFYO_fake_script() -- ScreenGuiDSP.LocalScript
 		end
 	end)
 	
-	PlayersMenuButtons.Unwing.MouseButton1Down:Connect(function()
+	PlayersMenuButtons.No_Arms.MouseButton1Down:Connect(function()
 		local Tool = GetPath()
 		local function Task()
 			for i,TargetedPlayer in pairs(GetPlayer(SelectedPlayers)) do
 				local HumanoidRootPart = TargetedPlayer.Character:FindFirstChild("HumanoidRootPart")
-				Delete(TargetedPlayer.Character:FindFirstChild("Right Leg"), Tool)
-                Delete(TargetedPlayer.Character:FindFirstChild("Left Leg"), Tool)
+				Delete(TargetedPlayer.Character:FindFirstChild("Right Arm"), Tool)
+                Delete(TargetedPlayer.Character:FindFirstChild("Left Arm"), Tool)
 			end
 		end
 		if Tool.Parent == plr.Backpack then
@@ -1384,6 +1398,26 @@ local function FFYO_fake_script() -- ScreenGuiDSP.LocalScript
 			for i,TargetedPlayer in pairs(GetPlayer(SelectedPlayers)) do
 				local HumanoidRootPart = TargetedPlayer.Character:FindFirstChild("HumanoidRootPart")
 				Delete(TargetedPlayer.Character.Humanoid, Tool)
+			end
+		end
+		if Tool.Parent == plr.Backpack then
+			Tool.Parent = plr.Character
+			wait()
+			Task()
+			wait()
+			Tool.Parent = plr.Backpack
+		elseif Tool.Parent == plr.Character then
+			Task()
+		end
+	end)
+
+    	PlayersMenuButtons.No_Arms.MouseButton1Down:Connect(function()
+		local Tool = GetPath()
+		local function Task()
+			for i,TargetedPlayer in pairs(GetPlayer(SelectedPlayers)) do
+				local HumanoidRootPart = TargetedPlayer.Character:FindFirstChild("HumanoidRootPart")
+				Delete(TargetedPlayer.Character:FindFirstChild("Right Arm"), Tool)
+                Delete(TargetedPlayer.Character:FindFirstChild("Left Arm"), Tool)
 			end
 		end
 		if Tool.Parent == plr.Backpack then
