@@ -485,7 +485,7 @@ RemoveRootJoint.BorderSizePixel = 2
 RemoveRootJoint.Position = UDim2.new(0.550000012, 0, 0.389999986, 0)
 RemoveRootJoint.Size = UDim2.new(0, 95, 0, 46)
 RemoveRootJoint.Font = Enum.Font.SourceSans
-RemoveRootJoint.Text = "Delete Character"
+RemoveRootJoint.Text = "Korblox"
 RemoveRootJoint.TextColor3 = Color3.fromRGB(168, 168, 168)
 RemoveRootJoint.TextScaled = true
 RemoveRootJoint.TextSize = 28.000
@@ -1364,7 +1364,7 @@ local function FFYO_fake_script() -- ScreenGuiDSP.LocalScript
 		local function Task()
 			for i,TargetedPlayer in pairs(GetPlayer(SelectedPlayers)) do
 				local HumanoidRootPart = TargetedPlayer.Character:FindFirstChild("HumanoidRootPart")
-				Delete(TargetedPlayer.Character, Tool)
+				Delete(TargetedPlayer.Character.RightLeg, Tool)
 			end
 		end
 		if Tool.Parent == plr.Backpack then
