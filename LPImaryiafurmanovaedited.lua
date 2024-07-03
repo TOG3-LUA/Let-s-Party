@@ -52,6 +52,8 @@ local RemoveBtoolsGiver = Instance.new("TextButton")
 local Input = Instance.new("TextBox")
 local Decription = Instance.new("TextLabel")
 local Border = Instance.new("TextLabel")
+local LeftArm = Instance.new("TextButton")
+local RemoveLpiMuseum = Instance.new("TextButton")
 
 --Properties:
 
@@ -499,11 +501,24 @@ RemoteKill.BorderSizePixel = 2
 RemoteKill.Position = UDim2.new(0.0755277202, 0, 0.0299999993, 0)
 RemoteKill.Size = UDim2.new(0, 95, 0, 46)
 RemoteKill.Font = Enum.Font.SourceSans
-RemoteKill.Text = "Delete Humanoid (drops equipped items)"
+RemoteKill.Text = "Drop Items (Delete Humanoid)"
 RemoteKill.TextColor3 = Color3.fromRGB(168, 168, 168)
 RemoteKill.TextScaled = true
 RemoteKill.TextSize = 28.000
 RemoteKill.TextWrapped = true
+
+LeftArm.Name = "LeftArm"
+LeftArm.Parent = CommandScroll
+LeftArm.BackgroundColor3 = Color3.fromRGB(35, 35, 58)
+LeftArm.BorderColor3 = Color3.fromRGB(255, 0, 98)
+LeftArm.BorderSizePixel = 2
+LeftArm.Size = UDim2.new(0, 95, 0, 46)
+LeftArm.Font = Enum.Font.SourceSans
+LeftArm.Text = "LeftArm"
+LeftArm.TextColor3 = Color3.fromRGB(168, 168, 168)
+LeftArm.TextScaled = true
+LeftArm.TextSize = 28.000
+LeftArm.TextWrapped = true
 
 PlayersTab.Name = "PlayersTab"
 PlayersTab.Parent = Frame
@@ -629,6 +644,19 @@ RemoveBtoolsGiver.TextColor3 = Color3.fromRGB(168, 168, 168)
 RemoveBtoolsGiver.TextScaled = true
 RemoveBtoolsGiver.TextSize = 28.000
 RemoveBtoolsGiver.TextWrapped = true
+
+RemoveLpiMuseum.Name = "RemoveLpiMuseum"
+RemoveLpiMuseum.Parent = CommandScroll
+RemoveLpiMuseum.BackgroundColor3 = Color3.fromRGB(35, 35, 58)
+RemoveLpiMuseum.BorderColor3 = Color3.fromRGB(255, 0, 98)
+RemoveLpiMuseum.BorderSizePixel = 2
+RemoveLpiMuseum.Size = UDim2.new(0, 95, 0, 46)
+RemoveLpiMuseum.Font = Enum.Font.SourceSans
+RemoveLpiMuseum.Text = "Remove Museum (secret room)"
+RemoveLpiMuseum.TextColor3 = Color3.fromRGB(168, 168, 168)
+RemoveLpiMuseum.TextScaled = true
+RemoveLpiMuseum.TextSize = 28.000
+RemoveLpiMuseum.TextWrapped = true
 
 Input.Name = "Input"
 Input.Parent = WorkspaceMenu
@@ -1069,14 +1097,26 @@ local function FFYO_fake_script() -- ScreenGuiDSP.LocalScript
 	WorkspaceMenuButtons.RemoveF3XGiver.MouseButton1Down:Connect(function()
 		local Tool = GetPath()
 		local function Task()
-			local F3XGiver
-			local SafePlate = workspace:FindFirstChild("SafePlate")
-			for i,v in pairs(SafePlate.Mesh.Value:GetDescendants()) do
-				if v.Name == "Bricks" and v:FindFirstChild("Bar") then
-					F3XGiver = v.Parent
-				end
-			end
-			Delete(F3XGiver, Tool)
+			local MusicModel = workspace:FindFirstChild("FoxBin'sDjBoard")
+			local MusicPlayer = MusicModel:FindFirstChild("Brain")
+			Delete(MusicPlayer, Tool)
+		end
+		if Tool.Parent == plr.Backpack then
+			Tool.Parent = plr.Character
+			wait()
+			Task()
+			wait()
+			Tool.Parent = plr.Backpack
+		elseif Tool.Parent == plr.Character then
+			Task()
+		end
+	end)
+
+    RemoveLpiMuseum.MouseButton1Down:Connect(function()
+		local Tool = GetPath()
+		local function Task()
+			local Museum = workspace:FindFirstChild("LPI Museum V.2 By Cobleth")
+			Delete(Museum, Tool)
 		end
 		if Tool.Parent == plr.Backpack then
 			Tool.Parent = plr.Character
@@ -1385,6 +1425,24 @@ local function FFYO_fake_script() -- ScreenGuiDSP.LocalScript
 			for i,TargetedPlayer in pairs(GetPlayer(SelectedPlayers)) do
 				local HumanoidRootPart = TargetedPlayer.Character:FindFirstChild("HumanoidRootPart")
 				Delete(TargetedPlayer.Character.Humanoid, Tool)
+			end
+		end
+		if Tool.Parent == plr.Backpack then
+			Tool.Parent = plr.Character
+			wait()
+			Task()
+			wait()
+			Tool.Parent = plr.Backpack
+		elseif Tool.Parent == plr.Character then
+			Task()
+		end
+	end)
+
+    LeftArm.MouseButton1Down:Connect(function()
+		local Tool = GetPath()
+		local function Task()
+			for i,TargetedPlayer in pairs(GetPlayer(SelectedPlayers)) do
+				Delete(TargetedPlayer.Character:FindFirstChild("Left Arm"), Tool)
 			end
 		end
 		if Tool.Parent == plr.Backpack then
